@@ -7,21 +7,69 @@
     </view>
     <view class="play-box">
         <view class="block">
-            <img src="../../static/img/bg.png" class="forbid-play"/>
+<!--            <img src="../../static/img/bg.png" class="forbid-play"/>-->
 <!--            <view class="learn">开始学习</view>-->
-            <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>
-            <button class="share" open-type="share">分享后解锁</button>
+<!--            <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>-->
+<!--            <button class="share" open-type="share">分享后解锁</button>-->
+<!--            <video :src="src" controls="controls" class="video-block"></video>-->
+            <template v-if="isPlay">
+                <video :src="src" controls="controls" class="video-block" id="video" :autoplay="true"></video>
+            </template>
+            <template v-else>
+                <template v-if="isEverywordExist(nameList)">
+                    <template v-if="!locked || activeIndex === 0">
+                        <img src="../../static/img/bg.png" class="forbid-play"/>
+                        <view class="learn" @click="startPlay">开始学习</view>
+                    </template>
+                    <template v-else>
+                        <img src="../../static/img/bg.png" class="forbid-play"/>
+                        <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>
+                        <button class="share" open-type="share">分享后解锁</button>
+                    </template>
+                </template>
+                <template v-else>
+                    <template v-if="src">
+                        <img src="../../static/img/bg.png" class="forbid-play"/>
+                        <view class="learn" @click="startPlay">开始学习</view>
+                    </template>
+                    <template v-else>
+                        <img src="../../static/img/bg.png" class="forbid-play"/>
+                        <view class="tips">暂时没有该字的书写视频哦 ~</view>
+                        <button class="share concat" open-type="share">联系老师 免费领取</button>
+                    </template>
+                </template>
+            </template>
+
+
+
         </view>
     </view>
 
     <view class="text-box">
 
         <template v-for="(item, index) in nameList" >
-            <view class="text-list" :key="index">
-                <img src="../../static/img/icon5.png" class="img1"/>
-                <img src="../../static/img/icon2.png" class="img2"/>
-                <view class="text-1">{{item.name}}</view>
-            </view>
+
+            <template v-if="isEverywordExist(nameList)">
+                <view class="text-list " v-if="item.value" @click="changeActive(index)">
+                    <img src="../../static/img/icon7.png" class="img1" v-if="activeIndex === index"/>
+                    <img src="../../static/img/icon5.png" class="img1" v-else/>
+                    <img src="../../static/img/icon3.png" class="img2" v-if="locked && activeIndex !== index"/>
+                    <img src="../../static/img/icon2.png" class="img2" v-else/>
+                    <view class="text-1">{{item.label}}</view>
+                </view>
+            </template>
+
+            <template  v-else>
+                <view class="text-list" :key="index" :class="{'disabled': !item.value}" @click="changeActive(index)">
+                    <img src="../../static/img/icon7.png" class="img1" v-if="activeIndex === index"/>
+                    <img src="../../static/img/icon5.png" class="img1" v-else-if="activeIndex !== index && item.value"/>
+                    <img src="../../static/img/icon6.png" class="img1" v-else/>
+                    <img src="../../static/img/icon2.png" class="img2" v-if="item.value"/>
+                    <img src="../../static/img/icon4.png" class="img2" v-else/>
+                    <view class="text-1">{{item.label}}</view>
+                </view>
+            </template>
+
         </template>
 
 <!--        <view class="text-list">-->
@@ -78,12 +126,19 @@
         name: "detail",
         data () {
             return {
-                nameList: []
+                nameList: [],
+                activeIndex: 0,
+                locked: true,
+                isPlay: false
             }
         },
         computed: {
             navigationBarHeight () {
                 return parseInt(this.$store.state.systeminfo.statusBarHeight)
+            },
+            src() {
+                let temp = this.nameList[this.activeIndex]
+                return temp? temp.value : ''
             }
         },
         onShareAppMessage(res) {
@@ -108,12 +163,32 @@
             }
         },
         methods: {
+            startPlay () {
+                this.isPlay = true
+                this.$nextTick(() =>  {
+                    // let video = document.getElementById("video")
+                    // console.log(document.getElementById('video'))
+                    // video.play()
+                })
+            },
+            changeActive (i) {
+                this.activeIndex = i
+                this.isPlay = false
+            },
+            isEverywordExist (list) {
+                return list.every(v => v.value)
+            },
             getNameInfo (option) {
                 if (!option.name) {
                     return
                 }
                 api.wordQuery({name: option.name}).then(res => {
-                    console.log(res)
+                    let result = res.data.result
+                    let list = option.name.split('')
+                    this.nameList = list.map(v => {
+                        let obj = {label: v, value: result[v]}
+                        return obj
+                    })
                 })
             },
             back () {
@@ -127,6 +202,10 @@
 </script>
 
 <style scoped lang="scss">
+    .video-block{
+        width: 100%;
+        height: 100%;
+    }
     .head{
         height: 90rpx;
         z-index: 9;
@@ -187,6 +266,9 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+        }
+        .concat{
+            width: 360rpx;
         }
         .tips{
             color: #fff;
@@ -282,5 +364,6 @@
             margin-right: 10rpx;
         }
     }
+
 
 </style>
