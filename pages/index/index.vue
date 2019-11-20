@@ -1,25 +1,32 @@
 <template>
 	<view class="container" v-if="src">
 		<img :src="src + 'homeBg.png'" class="home-bg"/>
-		<view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
-			<view class="title">熊猫老师写名字</view>
-			<view class="head-img">
-				<img :src="src + 'home1.gif'" class="img1 img2"/>
-				<img :src="src + 'home2.png'" class="img1"/>
+		<view class="main-box">
+			<view class="title" :style="{paddingTop: navigationBarHeight + 'px'}">熊猫老师写名字</view>
+			<view class="guide-box">
+
+<!--				<view class="guide-block">-->
+<!--					<img src="../../static/img/cover.png" class="guide-bg" mode="widthFix"/>-->
+<!--				</view>-->
+
+				<view class="head-img">
+					<img :src="src + 'home1.gif'" class="img1 img2"/>
+					<img :src="src + 'home2.png'" class="img1"/>
+				</view>
+				<view class="bottom">
+					<view class="tips">你的名字怎么写？</view>
+					<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value"/>
+				</view>
+				<view class="watch">
+					<img :src="src + 'slogan.png'" class="slogan-img" mode="widthFix"/>
+					<button class="watch-btn" @click="linkHandle">
+						<text>观看名字视频</text>
+					</button>
+				</view>
 			</view>
+
 		</view>
 
-		<view class="bottom">
-			<view class="tips">你的名字怎么写？</view>
-			<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value"/>
-		</view>
-
-		<view class="watch">
-			<img :src="src + 'slogan.png'" class="slogan-img"/>
-			<button class="watch-btn" @click="linkHandle">
-				<text>观看名字视频</text>
-			</button>
-		</view>
 	</view>
 </template>
 
@@ -34,13 +41,11 @@
 		},
 		onShareAppMessage(res) {
 			return {
-				title: '熊猫老师写名字',
+				title: '孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！',
 				path: '/pages/index/index',
-				// imageUrl: `https://cdn.xiongmaolaoshi.com/1.7/${random}.png`,
+				imageUrl: `../../static/img/invite.png`,
 				success: function(res) {
 					console.log("转发回调", res)
-					// 转发成功
-					// 如果这里有 shareTickets，则说明是分享到群的
 				},
 				fail: function(res) {
 					console.log("失败")
@@ -103,35 +108,51 @@
 		flex-direction: column;
 		position: relative;
 	}
-	.head{
-		/*height: 568rpx;*/
+	.main-box{
 		z-index: 9;
-		.head-img{
-			width: 670rpx;
-			height: 380rpx;
-			margin: 52rpx auto 0;
-			position: relative;
-			.img1{
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				left: 0;
-				top: 0;
-				z-index:9;
-			}
-			.img2{
-				z-index: 99;
-			}
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.guide-box{
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		.guide-block{
+			width: 100%;
+			position: absolute;
+			height: 100%;
+			z-index:99;
 		}
-		.title{
-			text-align: center;
-			color: #151515;
-			font-size: 36rpx;
-			padding: 14rpx 0;
+		.guide-bg{
+			width: 100%;
 		}
 	}
+	.head-img{
+		width: 670rpx;
+		height: 380rpx;
+		margin: 52rpx auto 0;
+		position: relative;
+		.img1{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index:9;
+		}
+		.img2{
+			z-index: 10;
+		}
+	}
+	.title{
+		text-align: center;
+		color: #151515;
+		font-size: 36rpx;
+		padding: 14rpx 0;
+	}
 	.bottom{
-		z-index: 9;
 		padding: 0 40rpx;
 		.input{
 			box-sizing: border-box;
@@ -155,7 +176,6 @@
 		}
 	}
 	.watch{
-		z-index: 9;
 		flex: 1;
 		background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(255,226,191,1) 100%);
 		padding: 0 40rpx;
@@ -174,10 +194,10 @@
 			line-height: 160rpx;
 			color: #FFFFFF;
 			font-size: 40rpx;
+			box-shadow: 0rpx 10rpx 25rpx #FF5610;
 		}
 		.slogan-img{
-			height: 28rpx;
-			width: 384rpx;
+			width: 480rpx;
 			display: block;
 			margin: 60rpx auto 20rpx;
 		}

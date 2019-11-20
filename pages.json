@@ -13,6 +13,12 @@
 				"navigationBarTitleText": "熊猫老师写名字",
 				"navigationStyle": "custom"
 			}
+		},{
+			"path": "pages/concat/concat",
+			"style": {
+				"navigationBarTitleText": "熊猫老师写名字",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

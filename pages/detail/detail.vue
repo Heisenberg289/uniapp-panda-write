@@ -30,7 +30,12 @@
                         <template v-else>
                             <img :src="src + 'bg.png'" class="forbid-play"/>
                             <view class="tips">暂时没有该字的书写视频哦 ~</view>
-                            <button class="share concat" open-type="contact">联系老师 免费领取</button>
+                            <button class="share concat"
+                                    open-type="contact"
+                                    send-message-title="班主任老师"
+                                    :show-message-card="true"
+                                    send-message-img="../../static/img/getVideo.png"
+                            >联系老师 免费领取</button>
                         </template>
                     </template>
                 </template>
@@ -45,7 +50,7 @@
                     <view class="text-list " :key="index"  @click="changeActive(index)" :class="{'text-active': activeIndex === index}">
                         <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
                         <img :src="src + 'icon5.png'" class="img1" v-else/>
-                        <img :src="src + 'icon3.png'" class="img2" v-if="locked && activeIndex !== index"/>
+                        <img :src="src + 'icon3.png'" class="img2" v-if="locked && activeIndex !== 0"/>
                         <img :src="src + 'icon2.png'" class="img2" v-else/>
                         <view class="text-1">{{item.label}}</view>
                     </view>
@@ -90,7 +95,8 @@
                 nameList: [],
                 activeIndex: 0,
                 locked: true,
-                isPlay: false
+                isPlay: false,
+                readyShare: false,
             }
         },
         computed: {
@@ -99,7 +105,6 @@
             },
             videoSrc() {
                 let temp = this.nameList[this.activeIndex]
-                console.log(temp? temp.value : '', 888)
                 return temp? temp.value : ''
             },
             src () {
@@ -108,25 +113,31 @@
         },
         onShareAppMessage(res) {
             return {
-                title: '熊猫老师写名字',
+                title: '孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！',
                 path: '/pages/index/index',
-                // imageUrl: `https://cdn.xiongmaolaoshi.com/1.7/${random}.png`,
+                imageUrl: `../../static/img/invite.png`,
                 success: function(res) {
+                    console.log("转发回调", res)
+                },
+                fail: function(res) {
+                    console.log("失败")
+                }
+            }
+        },
+        onShow: function() {
+            if (this.readyShare) {
+                if (this.locked) {
                     uni.showToast({
                         title: '解锁成功',
                         image: '../../static/img/icon1.png',
                         icon: 'none',
                         mask: true
                     })
-                    this.locked= false
-                    console.log("转发回调", res)
-                    // 转发成功
-                    // 如果这里有 shareTickets，则说明是分享到群的
-                },
-                fail: function(res) {
-                    console.log("失败")
+                    this.locked = false
                 }
+
             }
+            this.readyShare = false
         },
         methods: {
             startPlay () {
