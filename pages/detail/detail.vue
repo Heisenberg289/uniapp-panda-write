@@ -1,123 +1,84 @@
 <template>
-<view  class="container">
-    <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
-        <img src="../../static/img/return.png" class="return" @click="back"/>
-        <view class="title">熊猫老师写名字</view>
-        <view></view>
-    </view>
-    <view class="play-box">
-        <view class="block">
-<!--            <img src="../../static/img/bg.png" class="forbid-play"/>-->
-<!--            <view class="learn">开始学习</view>-->
-<!--            <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>-->
-<!--            <button class="share" open-type="share">分享后解锁</button>-->
-<!--            <video :src="src" controls="controls" class="video-block"></video>-->
-            <template v-if="isPlay">
-                <video :src="src" controls="controls" class="video-block" id="video" :autoplay="true"></video>
-            </template>
-            <template v-else>
-                <template v-if="isEverywordExist(nameList)">
-                    <template v-if="!locked || activeIndex === 0">
-                        <img src="../../static/img/bg.png" class="forbid-play"/>
-                        <view class="learn" @click="startPlay">开始学习</view>
-                    </template>
-                    <template v-else>
-                        <img src="../../static/img/bg.png" class="forbid-play"/>
-                        <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>
-                        <button class="share" open-type="share">分享后解锁</button>
-                    </template>
+    <view  class="container" v-if="src">
+        <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
+            <img :src="src + 'return.png'" class="return" @click="back"/>
+            <view class="title">熊猫老师写名字</view>
+            <view></view>
+        </view>
+        <view class="play-box">
+            <view class="block">
+                <template v-if="isPlay">
+                    <video :src="videoSrc" controls="controls" class="video-block" id="video" :autoplay="true"></video>
                 </template>
                 <template v-else>
-                    <template v-if="src">
-                        <img src="../../static/img/bg.png" class="forbid-play"/>
-                        <view class="learn" @click="startPlay">开始学习</view>
+                    <template v-if="isEverywordExist(nameList)">
+                        <template v-if="!locked || activeIndex === 0">
+                            <img :src="src + 'bg.png'" class="forbid-play"/>
+                            <view class="learn" @click="startPlay">开始学习</view>
+                        </template>
+                        <template v-else>
+                            <img :src="src + 'bg.png'" class="forbid-play"/>
+                            <view class="tips">分享到微信群，可立即观看剩下所有视频哦~</view>
+                            <button class="share" open-type="share">分享后解锁</button>
+                        </template>
                     </template>
                     <template v-else>
-                        <img src="../../static/img/bg.png" class="forbid-play"/>
-                        <view class="tips">暂时没有该字的书写视频哦 ~</view>
-                        <button class="share concat" open-type="share">联系老师 免费领取</button>
+                        <template v-if="src">
+                            <img :src="src + 'bg.png'" class="forbid-play"/>
+                            <view class="learn" @click="startPlay">开始学习</view>
+                        </template>
+                        <template v-else>
+                            <img :src="src + 'bg.png'" class="forbid-play"/>
+                            <view class="tips">暂时没有该字的书写视频哦 ~</view>
+                            <button class="share concat" open-type="contact">联系老师 免费领取</button>
+                        </template>
                     </template>
+                </template>
+
+
+
+            </view>
+        </view>
+        <view class="text-box">
+            <template v-for="(item, index) in nameList" >
+                <template v-if="isEverywordExist(nameList)">
+                    <view class="text-list " v-if="item.value" @click="changeActive(index)">
+                        <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
+                        <img :src="src + 'icon5.png'" class="img1" v-else/>
+                        <img :src="src + 'icon3.png'" class="img2" v-if="locked && activeIndex !== index"/>
+                        <img :src="src + 'icon2.png'" class="img2" v-else/>
+                        <view class="text-1">{{item.label}}</view>
+                    </view>
+                </template>
+                <template  v-else>
+                    <view class="text-list" :key="index" :class="{'disabled': !item.value}" @click="changeActive(index)">
+                        <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
+                        <img :src="src + 'icon5.png'" class="img1" v-else-if="activeIndex !== index && item.value"/>
+                        <img :src="src + 'icon6.png'" class="img1" v-else/>
+                        <img :src="src + 'icon2.png'" class="img2" v-if="item.value"/>
+                        <img :src="src + 'icon4.png'" class="img2" v-else/>
+                        <view class="text-1">{{item.label}}</view>
+                    </view>
                 </template>
             </template>
 
 
-
+        </view>
+        <view class="btn-box">
+            <button  class="btn-list" open-type="contact">
+                <img :src="src + 'btn1.png'"/>
+                <text class="btn-text">0元学写字</text>
+            </button>
+            <button class="btn-list" open-type="share">
+                <img :src="src + 'btn2.png'"/>
+                <text class="btn-text">邀好友写名字</text>
+            </button>
+        </view>
+        <view class="student-box">
+            <img :src="src + 'students.png'"/>
+            <text>已有134312人跟着熊猫老师学写字</text>
         </view>
     </view>
-
-    <view class="text-box">
-
-        <template v-for="(item, index) in nameList" >
-
-            <template v-if="isEverywordExist(nameList)">
-                <view class="text-list " v-if="item.value" @click="changeActive(index)">
-                    <img src="../../static/img/icon7.png" class="img1" v-if="activeIndex === index"/>
-                    <img src="../../static/img/icon5.png" class="img1" v-else/>
-                    <img src="../../static/img/icon3.png" class="img2" v-if="locked && activeIndex !== index"/>
-                    <img src="../../static/img/icon2.png" class="img2" v-else/>
-                    <view class="text-1">{{item.label}}</view>
-                </view>
-            </template>
-
-            <template  v-else>
-                <view class="text-list" :key="index" :class="{'disabled': !item.value}" @click="changeActive(index)">
-                    <img src="../../static/img/icon7.png" class="img1" v-if="activeIndex === index"/>
-                    <img src="../../static/img/icon5.png" class="img1" v-else-if="activeIndex !== index && item.value"/>
-                    <img src="../../static/img/icon6.png" class="img1" v-else/>
-                    <img src="../../static/img/icon2.png" class="img2" v-if="item.value"/>
-                    <img src="../../static/img/icon4.png" class="img2" v-else/>
-                    <view class="text-1">{{item.label}}</view>
-                </view>
-            </template>
-
-        </template>
-
-<!--        <view class="text-list">-->
-<!--            <img src="../../static/img/icon5.png" class="img1"/>-->
-<!--            <img src="../../static/img/icon2.png" class="img2"/>-->
-<!--            <view class="text-1">古</view>-->
-<!--        </view>-->
-
-<!--        <view class="text-list disabled">-->
-<!--            <img src="../../static/img/icon6.png" class="img1"/>-->
-<!--            <img src="../../static/img/icon4.png" class="img2"/>-->
-<!--            <view class="text-1">古</view>-->
-<!--        </view>-->
-
-<!--        <view class="text-list locked">-->
-<!--            <img src="../../static/img/icon6.png" class="img1"/>-->
-<!--            <img src="../../static/img/icon3.png" class="img2"/>-->
-<!--            <view class="text-1">古</view>-->
-<!--        </view>-->
-
-<!--        <view class="text-list active">-->
-<!--            <img src="../../static/img/icon7.png" class="img1"/>-->
-<!--            <img src="../../static/img/icon3.png" class="img2"/>-->
-<!--            <view class="text-1">古</view>-->
-<!--        </view>-->
-
-    </view>
-
-    <view class="btn-box">
-        <button open-type="contact" class="btn-list">
-            <img src="../../static/img/btn1.png"/>
-            <text class="btn-text">0元学写字</text>
-        </button>
-<!--        <view class="btn-list">-->
-<!--            <img src="../../static/img/btn1.png"/>-->
-<!--            <text class="btn-text">0元学写字</text>-->
-<!--        </view>-->
-        <view class="btn-list">
-            <img src="../../static/img/btn2.png"/>
-            <text class="btn-text">邀好友写名字</text>
-        </view>
-    </view>
-
-    <view class="student-box">
-        <img src="../../static/img/students.png"/>
-        <text>已有134312人跟着熊猫老师学写字</text>
-    </view>
-</view>
 </template>
 
 <script>
@@ -136,9 +97,12 @@
             navigationBarHeight () {
                 return parseInt(this.$store.state.systeminfo.statusBarHeight)
             },
-            src() {
+            videoSrc() {
                 let temp = this.nameList[this.activeIndex]
                 return temp? temp.value : ''
+            },
+            src () {
+                return this.$store.state.imgsrc
             }
         },
         onShareAppMessage(res) {
@@ -153,6 +117,7 @@
                         icon: 'none',
                         mask: true
                     })
+                    this.locked= false
                     console.log("转发回调", res)
                     // 转发成功
                     // 如果这里有 shareTickets，则说明是分享到群的

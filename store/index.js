@@ -4,7 +4,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         systeminfo: uni.getSystemInfoSync(),
-        imgsrc: 'https://cdn.xiongmaolaoshi.com/panda/static/home/'
+        imgsrc: 'https://cdn.xiongmaolaoshi.com/write_name/'
     },
     mutations: {},
     actions: {}

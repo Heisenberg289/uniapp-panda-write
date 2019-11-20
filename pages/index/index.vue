@@ -1,23 +1,23 @@
 <template>
-	<view class="container">
-		<img src="../../static/img/homeBg.png" class="home-bg"/>
+	<view class="container" v-if="src">
+		<img :src="src + 'homeBg.png'" class="home-bg"/>
 		<view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
 			<view class="title">熊猫老师写名字</view>
 			<view class="head-img">
-				<img src="../../static/img/home1.gif" class="img1 img2"/>
-				<img src="../../static/img/home2.png" class="img1"/>
+				<img :src="src + 'home1.gif'" class="img1 img2"/>
+				<img :src="src + 'home2.png'" class="img1"/>
 			</view>
 		</view>
 
 		<view class="bottom">
-			<view class="tips">写名字</view>
+			<view class="tips">你的名字怎么写？</view>
 			<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value"/>
 		</view>
 
 		<view class="watch">
-			<img src="../../static/img/slogan.png" class="slogan-img"/>
+			<img :src="src + 'slogan.png'" class="slogan-img"/>
 			<button class="watch-btn" @click="linkHandle">
-				<text>观看我的名字视频</text>
+				<text>观看名字视频</text>
 			</button>
 		</view>
 	</view>
@@ -82,6 +82,9 @@
 		computed: {
 			navigationBarHeight () {
 				return parseInt(this.$store.state.systeminfo.statusBarHeight)
+			},
+			src () {
+				return this.$store.state.imgsrc
 			}
 		}
 	}
