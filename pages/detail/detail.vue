@@ -42,7 +42,7 @@
         <view class="text-box">
             <template v-for="(item, index) in nameList" >
                 <template v-if="isEverywordExist(nameList)">
-                    <view class="text-list " v-if="item.value" @click="changeActive(index)">
+                    <view class="text-list " :key="index"  @click="changeActive(index)" :class="{'text-active': activeIndex === index}">
                         <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
                         <img :src="src + 'icon5.png'" class="img1" v-else/>
                         <img :src="src + 'icon3.png'" class="img2" v-if="locked && activeIndex !== index"/>
@@ -51,7 +51,7 @@
                     </view>
                 </template>
                 <template  v-else>
-                    <view class="text-list" :key="index" :class="{'disabled': !item.value}" @click="changeActive(index)">
+                    <view class="text-list" :key="index" :class="{'disabled': !item.value, 'text-active': activeIndex === index}" @click="changeActive(index)">
                         <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
                         <img :src="src + 'icon5.png'" class="img1" v-else-if="activeIndex !== index && item.value"/>
                         <img :src="src + 'icon6.png'" class="img1" v-else/>
@@ -99,6 +99,7 @@
             },
             videoSrc() {
                 let temp = this.nameList[this.activeIndex]
+                console.log(temp? temp.value : '', 888)
                 return temp? temp.value : ''
             },
             src () {
@@ -167,6 +168,9 @@
 </script>
 
 <style scoped lang="scss">
+    .text-active{
+        box-shadow: 0 0 10rpx #FF8400;
+    }
     .video-block{
         width: 100%;
         height: 100%;
