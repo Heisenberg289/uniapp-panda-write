@@ -23,7 +23,7 @@
                         </template>
                     </template>
                     <template v-else>
-                        <template v-if="src">
+                        <template v-if="videoSrc">
                             <img :src="src + 'bg.png'" class="forbid-play"/>
                             <view class="learn" @click="startPlay">开始学习</view>
                         </template>
