@@ -9,6 +9,9 @@ button {
 button::after {
   display: none;
 }
+button::before {
+  display: none;
+}
 *{
   box-sizing: border-box;
 }
