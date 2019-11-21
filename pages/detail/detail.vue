@@ -143,6 +143,7 @@
             }
         },
         onShareAppMessage(res) {
+            this.readyShare = true
             return {
                 title: '孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！',
                 path: '/pages/index/index',
