@@ -35,7 +35,7 @@
 		onLoad() {
 		},
 		onShareAppMessage(res) {
-			const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字!']
+			const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字>>']
 			return {
 				title: title[Math.floor(Math.random() + 0.5)],
 				path: '/pages/index/index',

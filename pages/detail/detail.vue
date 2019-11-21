@@ -17,6 +17,7 @@
                          send-message-path="../index/index"
                          send-message-img="../../static/img/getLesson.png"
                 >
+
                     <img src="../../static/img/knowBtn.png"  mode="widthFix"/>
                 </button>
             </view>
@@ -149,7 +150,7 @@
         },
         onShareAppMessage(res) {
             this.readyShare = true
-            const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字!']
+            const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字>>']
             return {
                 title: title[Math.floor(Math.random() + 0.5)],
                 path: '/pages/index/index',
@@ -218,6 +219,9 @@
                         let obj = {label: v, value: result[v]}
                         return obj
                     })
+                    if (!this.isEverywordExist(this.nameList)) {
+                        this.locked = false
+                    }
                 })
             },
             back () {
