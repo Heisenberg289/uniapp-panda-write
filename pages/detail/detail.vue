@@ -381,11 +381,11 @@
     }
     .text-box{
         display: flex;
-        padding: 52rpx 12rpx 96rpx;
+        padding: 60rpx 40rpx 36rpx;
         flex-wrap: wrap;
         position: relative;
         .text-list{
-            margin: 0 6% 32rpx;
+            margin: 0 6% 40rpx;
             height: 0;
             position: relative;
             width: 21.3%;
