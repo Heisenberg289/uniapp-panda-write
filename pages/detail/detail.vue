@@ -10,6 +10,7 @@
                 <img src="../../static/img/get-lesson.png" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
                          class="cover-2"
+                         hover-class="none"
                          open-type="contact"
                          send-message-title="班主任老师:"
                          :show-message-card="true"
@@ -22,6 +23,7 @@
                 <img src="../../static/img/get-video.png" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
                          class="cover-2"
+                         hover-class="none"
                          open-type="contact"
                          send-message-title="书法老师:"
                          :show-message-card="true"
