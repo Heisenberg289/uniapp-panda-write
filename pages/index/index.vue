@@ -145,8 +145,9 @@
 	.title{
 		text-align: center;
 		color: #151515;
+		font-weight: bold;
 		font-size: 36rpx;
-		padding: 14rpx 0;
+		line-height: 64rpx;
 	}
 	.bottom{
 		padding: 0 40rpx;
