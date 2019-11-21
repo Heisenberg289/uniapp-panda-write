@@ -11,7 +11,7 @@
                 <button  @click="cancel"
                          class="cover-2"
                          open-type="contact"
-                         send-message-title="书法老师"
+                         send-message-title="班主任老师:"
                          :show-message-card="true"
                          send-message-img="../../static/img/getLesson.png"
                 >
@@ -22,7 +22,7 @@
                 <img src="../../static/img/get-video.png" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
                          open-type="contact"
-                         send-message-title="书法老师"
+                         send-message-title="书法老师:"
                          :show-message-card="true"
                          send-message-img="../../static/img/getVideo.png"
                 >
@@ -124,7 +124,7 @@
                 isPlay: false,
                 readyShare: false,
                 showGetVideoTip: false,
-                showGetLessonTip: true
+                showGetLessonTip: false
             }
         },
         computed: {
