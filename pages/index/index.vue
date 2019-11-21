@@ -4,18 +4,13 @@
 		<view class="main-box">
 			<view class="title" :style="{paddingTop: navigationBarHeight + 'px'}">熊猫老师写名字</view>
 			<view class="guide-box">
-
-<!--				<view class="guide-block">-->
-<!--					<img src="../../static/img/cover.png" class="guide-bg" mode="widthFix"/>-->
-<!--				</view>-->
-
 				<view class="head-img">
 					<img :src="src + 'home1.gif'" class="img1 img2"/>
 					<img :src="src + 'home2.png'" class="img1"/>
 				</view>
 				<view class="bottom">
 					<view class="tips">你的名字怎么写？</view>
-					<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value"/>
+					<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value" :maxlength="6"/>
 				</view>
 				<view class="watch">
 					<img :src="src + 'slogan.png'" class="slogan-img" mode="widthFix"/>

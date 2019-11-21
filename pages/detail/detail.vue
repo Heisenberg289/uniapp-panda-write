@@ -21,12 +21,13 @@
             <view class="cover-1" v-if="showGetVideoTip">
                 <img src="../../static/img/get-video.png" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
+                         class="cover-2"
                          open-type="contact"
                          send-message-title="书法老师:"
                          :show-message-card="true"
                          send-message-img="../../static/img/getVideo.png"
                 >
-                    <img src="../../static/img/knowBtn.png" class="cover-2" mode="widthFix"/>
+                    <img src="../../static/img/knowBtn.png" mode="widthFix"/>
                 </button>
             </view>
         </view>
