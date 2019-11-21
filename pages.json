@@ -1,6 +1,13 @@
 {
 	"pages": [
 		{
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "熊猫老师写名字",
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "熊猫老师写名字",
@@ -8,12 +15,6 @@
 			}
 		},
 		{
-			"path": "pages/detail/detail",
-			"style": {
-				"navigationBarTitleText": "熊猫老师写名字",
-				"navigationStyle": "custom"
-			}
-		},{
 			"path": "pages/concat/concat",
 			"style": {
 				"navigationBarTitleText": "熊猫老师写名字",

@@ -1,5 +1,36 @@
 <template>
     <view  class="container" v-if="src">
+
+        <view class="guide-container" v-if="showGetVideoTip || showGetLessonTip">
+            <view class="cover-0">
+                <img src="../../static/img/guide-top.png" class="top" :style="{top: navigationBarHeight + 'px'}" mode="widthFix"/>
+                <img src="../../static/img/guide-bottom.png" class="bottom" mode="widthFix"/>
+            </view>
+            <view class="cover-1" v-if="showGetLessonTip">
+                <img src="../../static/img/get-lesson.png" class="cover-3" mode="widthFix"/>
+                <button  @click="cancel"
+                         class="cover-2"
+                         open-type="contact"
+                         send-message-title="书法老师"
+                         :show-message-card="true"
+                         send-message-img="../../static/img/getLesson.png"
+                >
+                    <img src="../../static/img/knowBtn.png"  mode="widthFix"/>
+                </button>
+            </view>
+            <view class="cover-1" v-if="showGetVideoTip">
+                <img src="../../static/img/get-video.png" class="cover-3" mode="widthFix"/>
+                <button  @click="cancel"
+                         open-type="contact"
+                         send-message-title="书法老师"
+                         :show-message-card="true"
+                         send-message-img="../../static/img/getVideo.png"
+                >
+                    <img src="../../static/img/knowBtn.png" class="cover-2" mode="widthFix"/>
+                </button>
+            </view>
+        </view>
+
         <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
             <img :src="src + 'return.png'" class="return" @click="back"/>
             <view class="title">熊猫老师写名字</view>
@@ -30,12 +61,7 @@
                         <template v-else>
                             <img :src="src + 'bg.png'" class="forbid-play"/>
                             <view class="tips">暂时没有该字的书写视频哦 ~</view>
-                            <button class="share concat"
-                                    open-type="contact"
-                                    send-message-title="班主任老师"
-                                    :show-message-card="true"
-                                    send-message-img="../../static/img/getVideo.png"
-                            >联系老师 免费领取</button>
+                            <button @click="getVideo" class="share concat">联系老师 免费领取</button>
                         </template>
                     </template>
                 </template>
@@ -50,7 +76,7 @@
                     <view class="text-list " :key="index"  @click="changeActive(index)" :class="{'text-active': activeIndex === index}">
                         <img :src="src + 'icon7.png'" class="img1" v-if="activeIndex === index"/>
                         <img :src="src + 'icon5.png'" class="img1" v-else/>
-                        <img :src="src + 'icon3.png'" class="img2" v-if="locked && activeIndex !== 0"/>
+                        <img :src="src + 'icon3.png'" class="img2" v-if="locked && index !== 0"/>
                         <img :src="src + 'icon2.png'" class="img2" v-else/>
                         <view class="text-1">{{item.label}}</view>
                     </view>
@@ -70,7 +96,7 @@
 
         </view>
         <view class="btn-box">
-            <button  class="btn-list" open-type="contact">
+            <button  class="btn-list" @click="getLesson">
                 <img :src="src + 'btn1.png'"/>
                 <text class="btn-text">0元学写字</text>
             </button>
@@ -97,6 +123,8 @@
                 locked: true,
                 isPlay: false,
                 readyShare: false,
+                showGetVideoTip: false,
+                showGetLessonTip: true
             }
         },
         computed: {
@@ -140,6 +168,16 @@
             this.readyShare = false
         },
         methods: {
+            getLesson () {
+                this.showGetLessonTip = true
+            },
+            getVideo () {
+                this.showGetVideoTip = true
+            },
+            cancel () {
+                this.showGetLessonTip = false
+                this.showGetVideoTip = false
+            },
             startPlay () {
                 this.isPlay = true
                 this.$nextTick(() =>  {
@@ -179,6 +217,64 @@
 </script>
 
 <style scoped lang="scss">
+    .guide-container{
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        background-color: #fff;
+        .cover-0{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            .top{
+                position: absolute;
+                width: 100%;
+            }
+            .bottom{
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+            }
+        }
+        .cover-1{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+        .cover-2{
+            position: absolute;
+            width: 200rpx;
+            left: 180rpx;
+            bottom: 310rpx;
+            &>img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .cover-3{
+            right: 0;
+            bottom: 160rpx;
+            position: absolute;
+        }
+        .guide-bg{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .guide-button{            position: absolute;
+            z-index: 9;
+        }
+    }
     .text-active{
         box-shadow: 0 0 10rpx #FF8400;
     }
