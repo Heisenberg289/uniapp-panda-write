@@ -3,11 +3,11 @@
 
         <view class="guide-container" v-if="showGetVideoTip || showGetLessonTip">
             <view class="cover-0">
-                <img src="../../static/img/guide-top.png" class="top" :style="{top: navigationBarHeight + 'px'}" mode="widthFix"/>
-                <img src="../../static/img/guide-bottom.png" class="bottom" mode="widthFix"/>
+                <img :src="src + 'guide-top.png'" class="top" :style="{top: navigationBarHeight + 'px'}" mode="widthFix"/>
+                <img :src="src + 'guide-bottom.png'" class="bottom" mode="widthFix"/>
             </view>
             <view class="cover-1" v-if="showGetLessonTip">
-                <img src="../../static/img/get-lesson.png" class="cover-3" mode="widthFix"/>
+                <img :src="src + 'get-lesson.png'" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
                          class="cover-2"
                          hover-class="none"
@@ -15,14 +15,14 @@
                          send-message-title="班主任老师:"
                          :show-message-card="true"
                          send-message-path="../index/index"
-                         send-message-img="../../static/img/getLesson.png"
+                         :send-message-img="`${src}getLesson.png`"
                 >
 
-                    <img src="../../static/img/knowBtn.png"  mode="widthFix"/>
+                    <img :src="src + 'knowBtn.png'"  mode="widthFix"/>
                 </button>
             </view>
             <view class="cover-1" v-if="showGetVideoTip">
-                <img src="../../static/img/get-video.png" class="cover-3" mode="widthFix"/>
+                <img :src="src + 'get-video.png'" class="cover-3" mode="widthFix"/>
                 <button  @click="cancel"
                          class="cover-2"
                          hover-class="none"
@@ -30,9 +30,9 @@
                          send-message-title="书法老师:"
                          :show-message-card="true"
                          send-message-path="../index/index"
-                         send-message-img="../../static/img/getVideo.png"
+                         :send-message-img="`${src}getVideo.png`"
                 >
-                    <img src="../../static/img/knowBtn.png" mode="widthFix"/>
+                    <img :src="src + 'knowBtn.png'" mode="widthFix"/>
                 </button>
             </view>
         </view>
@@ -154,7 +154,7 @@
             return {
                 title: title[Math.floor(Math.random() + 0.5)],
                 path: '/pages/index/index',
-                imageUrl: `../../static/img/invite.png`,
+                imageUrl: this.src + `invite.png`,
                 success: function(res) {
                     console.log("转发回调", res)
                 },
