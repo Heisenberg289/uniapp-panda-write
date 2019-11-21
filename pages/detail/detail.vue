@@ -14,6 +14,7 @@
                          open-type="contact"
                          send-message-title="班主任老师:"
                          :show-message-card="true"
+                         send-message-path="../index/index"
                          send-message-img="../../static/img/getLesson.png"
                 >
                     <img src="../../static/img/knowBtn.png"  mode="widthFix"/>
@@ -27,6 +28,7 @@
                          open-type="contact"
                          send-message-title="书法老师:"
                          :show-message-card="true"
+                         send-message-path="../index/index"
                          send-message-img="../../static/img/getVideo.png"
                 >
                     <img src="../../static/img/knowBtn.png" mode="widthFix"/>
@@ -35,7 +37,10 @@
         </view>
 
         <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
-            <img :src="src + 'return.png'" class="return" @click="back"/>
+            <view class="return" @click="back">
+                <img :src="src + 'return.png'" mode="widthFix" />
+            </view>
+
             <view class="title">熊猫老师写名字</view>
             <view></view>
         </view>
@@ -144,8 +149,9 @@
         },
         onShareAppMessage(res) {
             this.readyShare = true
+            const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字!']
             return {
-                title: '孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！',
+                title: title[Math.floor(Math.random() + 0.5)],
                 path: '/pages/index/index',
                 imageUrl: `../../static/img/invite.png`,
                 success: function(res) {
@@ -200,6 +206,10 @@
             getNameInfo (option) {
                 if (!option.name) {
                     return
+                }
+                let reg= /^[\u4e00-\u9fa5]+$/
+                if (!reg.test(option.name)){
+                    return false
                 }
                 api.wordQuery({name: option.name}).then(res => {
                     let result = res.data.result
@@ -295,7 +305,11 @@
         .return{
             width: 24rpx;
             height: 42rpx;
-            margin-left: 28rpx;
+            padding: 24rpx 28rpx;
+            &>img{
+                width: 100%;
+                height: 100%;
+            }
         }
         .title{
             text-align: center;

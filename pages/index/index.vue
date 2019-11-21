@@ -35,8 +35,9 @@
 		onLoad() {
 		},
 		onShareAppMessage(res) {
+			const title = ['孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！', '孩子名字写的歪歪扭扭， 专业名师免费教你写名字!']
 			return {
-				title: '孩子名字写的歪歪扭扭，熊猫老师教你名字变好看！',
+				title: title[Math.floor(Math.random() + 0.5)],
 				path: '/pages/index/index',
 				imageUrl: `../../static/img/invite.png`,
 				success: function(res) {
@@ -51,7 +52,7 @@
 			linkHandle () {
 				if (this.value.length < 2) {
 					uni.showToast({
-						title: '请输入2个以上的汉字~',
+						title: '请输入2个以上的汉字',
 						icon: 'none',
 						mask: true
 					})
@@ -59,7 +60,7 @@
 				}
 				if (this.value.length > 6) {
 					uni.showToast({
-						title: '请输入6个以内的汉字~',
+						title: '请输入2个以上的汉字',
 						icon: 'none',
 						mask: true
 					})
@@ -68,7 +69,7 @@
 				let reg= /^[\u4e00-\u9fa5]+$/
 				if (!reg.test(this.value)){
 					uni.showToast({
-						title: '不全是中文~',
+						title: '请输入2个以上的汉字',
 						icon: 'none',
 						mask: true
 					})
