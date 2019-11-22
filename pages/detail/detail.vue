@@ -168,7 +168,7 @@
                 if (this.locked) {
                     uni.showToast({
                         title: '解锁成功',
-                        image: '../../static/img/toast-icon.png',
+                        image: '../../static/img/icon1.png',
                         icon: 'none',
                         mask: true
                     })
