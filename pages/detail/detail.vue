@@ -403,8 +403,8 @@
                 position: absolute;
                 width: 40rpx;
                 height: 40rpx;
-                right: -20rpx;
-                top: -20rpx;
+                right: -10rpx;
+                top: -10rpx;
             }
             .text-1{
                 z-index: 9;
