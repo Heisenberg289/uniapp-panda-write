@@ -14,7 +14,7 @@
                          open-type="contact"
                          send-message-title="班主任老师:"
                          :show-message-card="true"
-                         send-message-path="../index/index"
+                         send-message-path="../index/index?key=bz"
                          :send-message-img="`${src}getLesson.png`"
                 >
 
@@ -29,7 +29,7 @@
                          open-type="contact"
                          send-message-title="书法老师:"
                          :show-message-card="true"
-                         send-message-path="../index/index"
+                         send-message-path="../index/index?key=sf"
                          :send-message-img="`${src}getVideo.png`"
                 >
                     <img :src="src + 'knowBtn.png'" mode="widthFix"/>
@@ -168,7 +168,7 @@
                 if (this.locked) {
                     uni.showToast({
                         title: '解锁成功',
-                        image: '../../static/img/icon1.png',
+                        image: '../../static/img/toast-icon.png',
                         icon: 'none',
                         mask: true
                     })
