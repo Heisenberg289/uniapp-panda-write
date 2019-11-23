@@ -104,20 +104,23 @@
 
 
         </view>
-        <view class="btn-box">
-            <button  class="btn-list" @click="getLesson">
-                <img :src="src + 'btn1.png'"/>
-                <text class="btn-text">0元学写字</text>
-            </button>
-            <button class="btn-list" open-type="share">
-                <img :src="src + 'btn2.png'"/>
-                <text class="btn-text">邀好友写名字</text>
-            </button>
+        <view class="bottom-box">
+            <view class="btn-box">
+                <button  class="btn-list" @click="getLesson">
+                    <img :src="src + 'btn1.png'"/>
+                    <text class="btn-text">0元学写字</text>
+                </button>
+                <button class="btn-list" open-type="share">
+                    <img :src="src + 'btn2.png'"/>
+                    <text class="btn-text">邀好友写名字</text>
+                </button>
+            </view>
+            <view class="student-box">
+                <img :src="src + 'students.png'"/>
+                <text>已有134312人跟着熊猫老师学写字</text>
+            </view>
         </view>
-        <view class="student-box">
-            <img :src="src + 'students.png'"/>
-            <text>已有134312人跟着熊猫老师学写字</text>
-        </view>
+
     </view>
 </template>
 
@@ -235,6 +238,15 @@
 </script>
 
 <style scoped lang="scss">
+    .container{
+        min-height: 100vh;
+        position: relative;
+        .bottom-box{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    }
     .guide-container{
         position: fixed;
         left: 0;
@@ -456,6 +468,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-bottom: 74rpx;
         &>img{
             height: 40rpx;
             width: 91rpx;

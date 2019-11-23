@@ -10,7 +10,10 @@
 				</view>
 				<view class="bottom">
 					<view class="tips">你的名字怎么写？</view>
-					<input placeholder="请输入名字"	placeholder-class="placeholder"	class="input" v-model="value" :maxlength="6"/>
+					<input placeholder="请输入名字"
+						   placeholder-style="color: #E5D2CA;"
+						   placeholder-class="placeholder"
+						   class="input" v-model="value" :maxlength="6"/>
 				</view>
 				<view class="watch">
 					<img :src="src + 'slogan.png'" class="slogan-img" mode="widthFix"/>
