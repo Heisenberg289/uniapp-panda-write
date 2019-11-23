@@ -17,10 +17,12 @@
 				</view>
 				<view class="watch">
 					<img :src="src + 'slogan.png'" class="slogan-img" mode="widthFix"/>
-					<button class="watch-btn" @click="linkHandle">
-						<text>观看名字视频</text>
-					</button>
+					<view class="link-1" @click="linkHandle">
+						<view class="link-3">观看名字视频</view>
+						<img src="../../static/img/home-btn.png" class="link-2"/>
+					</view>
 				</view>
+
 			</view>
 
 		</view>
@@ -95,6 +97,27 @@
 </script>
 
 <style lang="scss">
+	.link-1{
+		position: relative;
+	}
+	.link-2{
+		width: 680rpx;
+		display: block;
+		margin: 0 auto;
+		height: 230rpx;
+	}
+	.link-3{
+		height: 160rpx;
+		line-height: 160rpx;
+		text-align: center;
+		color: #FFFFFF;
+		font-size: 40rpx;
+		font-weight: bold;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+	}
 	.home-bg{
 		position: absolute;
 		width: 100%;
@@ -164,6 +187,7 @@
 			font-size: 40rpx;
 			box-shadow:0px 0px 8px 0px rgba(255,233,203,1);
 			font-weight: bold;
+			color: #2D3C63;
 		}
 		.tips{
 			padding: 40rpx 0;
@@ -195,6 +219,7 @@
 			color: #FFFFFF;
 			font-size: 40rpx;
 			box-shadow: 0rpx 10rpx 25rpx #FF5610;
+			font-weight: bold;
 		}
 		.slogan-img{
 			width: 480rpx;

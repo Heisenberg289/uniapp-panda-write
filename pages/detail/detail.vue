@@ -1,5 +1,5 @@
 <template>
-    <view  class="container" v-if="src">
+    <view  class="container" v-if="src" :class="{'isIphoneX': isIphoneX}">
 
         <view class="guide-container" v-if="showGetVideoTip || showGetLessonTip">
             <view class="cover-0">
@@ -39,11 +39,11 @@
 
         <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
             <view class="return" @click="back">
-                <img :src="src + 'return.png'" mode="widthFix" />
+                <img src="../../static/img/icon-back.png" mode="widthFix" />
             </view>
 
             <view class="title">熊猫老师写名字</view>
-            <view></view>
+            <view class="return-right"></view>
         </view>
         <view class="play-box">
             <view class="block">
@@ -136,7 +136,8 @@
                 isPlay: false,
                 readyShare: false,
                 showGetVideoTip: false,
-                showGetLessonTip: false
+                showGetLessonTip: false,
+                isIphoneX: false
             }
         },
         computed: {
@@ -229,10 +230,25 @@
             },
             back () {
                 uni.navigateBack()
+            },
+            isIphoneXHandle () {
+                let _this = this
+                uni.getSystemInfo({
+                    success: function(res) {
+                        console.log(res.model)
+                        var model = res.model
+                        if (model.search('iPhone X') != -1){
+                            _this.isIphoneX = true;
+                        }else{
+                            _this.isIphoneX = false;
+                        }
+                    }
+                })
             }
         },
         onLoad: function(option) {
             this.getNameInfo(option)
+            this.isIphoneXHandle()
         }
     }
 </script>
@@ -319,18 +335,22 @@
         align-items: center;
         justify-content: space-between;
         .return{
-            width: 24rpx;
-            height: 42rpx;
-            padding: 24rpx 28rpx;
+            width: 40rpx;
+            height: 40rpx;
+            padding: 24rpx 26rpx;
             &>img{
                 width: 100%;
                 height: 100%;
             }
         }
+        .return-right{
+            width: 66rpx;
+        }
         .title{
             text-align: center;
             color: #151515;
             font-size: 36rpx;
+            font-weight: bold;
         }
     }
     .play-box{
@@ -376,6 +396,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            font-weight: bold;
         }
         .concat{
             width: 360rpx;
@@ -474,6 +495,9 @@
             width: 91rpx;
             margin-right: 10rpx;
         }
+    }
+    .isIphoneX .student-box{
+        padding-bottom: 316rpx;
     }
 
 
