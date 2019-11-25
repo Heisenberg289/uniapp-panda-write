@@ -5,8 +5,8 @@
 			<view class="title" :style="{paddingTop: navigationBarHeight + 'px'}">熊猫老师写名字</view>
 			<view class="guide-box">
 				<view class="head-img">
-					<img :src="src + 'home1.gif'" class="img1 img2"/>
-					<img :src="src + 'home2.png'" class="img1"/>
+					<img :src="src + 'home1.gif'" class="img1" mode="widthFix"/>
+					<img :src="src + 'home2.png'" class="img2" mode="widthFix"/>
 				</view>
 				<view class="bottom">
 					<view class="tips">你的名字怎么写？</view>
@@ -152,20 +152,17 @@
 		}
 	}
 	.head-img{
-		width: 670rpx;
-		height: 380rpx;
 		margin: 52rpx auto 0;
 		position: relative;
+		.img2{
+			width: 670rpx;
+		}
 		.img1{
+			position: absolute;
 			width: 100%;
 			height: 100%;
-			position: absolute;
 			left: 0;
 			top: 0;
-			z-index:9;
-		}
-		.img2{
-			z-index: 10;
 		}
 	}
 	.title{

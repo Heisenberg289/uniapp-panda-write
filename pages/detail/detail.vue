@@ -236,8 +236,10 @@
                 uni.getSystemInfo({
                     success: function(res) {
                         console.log(res.model)
+                        console.log(res.windowHeight)
                         var model = res.model
-                        if (model.search('iPhone X') != -1){
+                        // model.search('iPhone X') != -1
+                        if (res.windowHeight > 800){
                             _this.isIphoneX = true;
                         }else{
                             _this.isIphoneX = false;

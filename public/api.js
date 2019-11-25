@@ -1,5 +1,5 @@
-// const baseUrl = 'https://online.xiongmaolaoshi.com/'
-const baseUrl = 'https://pandatest.junxing-tech.com/'
+const baseUrl = 'https://online.xiongmaolaoshi.com/'
+// const baseUrl = 'https://pandatest.junxing-tech.com/'
 const util = {
 	//封装网络请求
 	request(url, data, method = 'GET') {
