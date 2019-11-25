@@ -44,7 +44,7 @@
 			return {
 				title: title[Math.floor(Math.random() + 0.5)],
 				path: '/pages/index/index',
-				imageUrl: `../../static/img/invite.png`,
+				imageUrl: this.src + `invite.png`,
 				success: function(res) {
 					console.log("转发回调", res)
 				},
