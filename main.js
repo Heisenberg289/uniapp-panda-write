@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import App from './App'
 import store from './store'
+import App from './App'
 import './main.scss'
 //把vuex定义成全局组件
 Vue.prototype.$store = store

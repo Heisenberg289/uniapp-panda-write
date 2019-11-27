@@ -1,6 +1,16 @@
 <script>
+    import api from './public/api'
 	export default {
 		onLaunch: function() {
+            const params = {
+                type: 3,
+                versions: 1.0
+            }
+            api.getAdress(params).then(res => {
+                if (res.statusCode === 200) {
+                    this.$store.commit('setBaseurl', res.data)
+                }
+            })
 			console.log('App Launch')
 		},
 		onShow: function() {

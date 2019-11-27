@@ -2,11 +2,11 @@
 	<view class="container" v-if="src">
 		<img :src="src + 'homeBg.png'" class="home-bg"/>
 		<view class="main-box">
-			<view class="title" :style="{paddingTop: navigationBarHeight + 'px'}">熊猫老师写名字</view>
+			<view class="title" :style="{paddingTop: navigationBarHeight + 'px'}">熊猫师父写名字</view>
 			<view class="guide-box">
 				<view class="head-img">
 					<img :src="src + 'home1.gif'" class="img1" mode="widthFix"/>
-					<img :src="src + 'home2.png'" class="img2" mode="widthFix"/>
+					<img :src="src + 'banner-bg-1.png'" class="img2" mode="widthFix"/>
 				</view>
 				<view class="bottom">
 					<view class="tips">你的名字怎么写？</view>

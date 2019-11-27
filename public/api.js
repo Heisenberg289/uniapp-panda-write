@@ -1,11 +1,13 @@
-const baseUrl = 'https://online.xiongmaolaoshi.com/'
-// const baseUrl = 'https://pandatest.junxing-tech.com/'
+const basicUrl = 'https://online.xiongmaolaoshi.com/'
+// const basicUrl = 'https://pandatest.junxing-tech.com/'
+import store from '../store'
 const util = {
 	//封装网络请求
 	request(url, data, method = 'GET') {
+		const baseUrl = store.getters.getBaseUrl
 		return new Promise((resolev, reject) => {
 			uni.request({
-				url: `${baseUrl}${url}`,
+				url: `${baseUrl || basicUrl}${url}`,
 				data: data,
 				method: method,
 				header: {
@@ -22,18 +24,10 @@ const util = {
 	},
 };
 export default {
-	/* --------------用户相关------------- */
-	// uni登录
-	// login(config) {
-	// 	return new Promise((resolev, reject) => {
-	// 		uni.login({
-	// 			provider: config.provider,
-	// 			success: resolev,
-	// 			fail: reject
-	// 		})
-	// 	})
-	// },
 	wordQuery(data) {
 		return util.request('name/character/query/', data, 'POST')
+	},
+	getAdress(data) {
+		return util.request('home/address/', data, 'POST')
 	}
 }

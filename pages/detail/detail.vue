@@ -42,7 +42,7 @@
                 <img src="../../static/img/icon-back.png" mode="widthFix" />
             </view>
 
-            <view class="title">熊猫老师写名字</view>
+            <view class="title">熊猫师父写名字</view>
             <view class="return-right"></view>
         </view>
         <view class="play-box">
@@ -235,8 +235,8 @@
                 let _this = this
                 uni.getSystemInfo({
                     success: function(res) {
-                        console.log(res.model)
-                        console.log(res.windowHeight)
+                        // console.log(res.model)
+                        // console.log(res.windowHeight)
                         var model = res.model
                         // model.search('iPhone X') != -1
                         if (res.windowHeight > 800){
