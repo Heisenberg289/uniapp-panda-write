@@ -8,7 +8,7 @@
             }
             api.getAdress(params).then(res => {
                 if (res.statusCode === 200) {
-                    this.$store.commit('setBaseurl', res.data)
+                    this.$store.commit('setBaseurl', res.data.result.addr)
                 }
             })
 			console.log('App Launch')
