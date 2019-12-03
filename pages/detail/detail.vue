@@ -1,41 +1,42 @@
 <template>
     <view  class="container" v-if="src" :class="{'isIphoneX': isIphoneX}">
-
-        <view class="guide-container" v-if="showGetVideoTip || showGetLessonTip">
+        
+        <button class="guide-container" v-if="showGetLessonTip"
+                @click="cancel"
+                hover-class="none"
+                open-type="contact"
+                send-message-title="班主任老师:"
+                :show-message-card="true"
+                send-message-path="../index/index?key=bz"
+                :send-message-img="`${src}getLesson.png`">
             <view class="cover-0">
                 <img :src="src + 'guide-top.png'" class="top" :style="{top: navigationBarHeight + 'px'}" mode="widthFix"/>
                 <img :src="src + 'guide-bottom.png'" class="bottom" mode="widthFix"/>
             </view>
-            <view class="cover-1" v-if="showGetLessonTip">
+            <view class="cover-1">
                 <img :src="src + 'get-lesson.png'" class="cover-3" mode="widthFix"/>
-                <button  @click="cancel"
-                         class="cover-2"
-                         hover-class="none"
-                         open-type="contact"
-                         send-message-title="班主任老师:"
-                         :show-message-card="true"
-                         send-message-path="../index/index?key=bz"
-                         :send-message-img="`${src}getLesson.png`"
-                >
+                <img :src="src + 'knowBtn.png'"  mode="widthFix" class="cover-2"/>
+            </view>
+        </button>
 
-                    <img :src="src + 'knowBtn.png'"  mode="widthFix"/>
-                </button>
+        <button class="guide-container" v-if="showGetVideoTip"
+                @click="cancel"
+                hover-class="none"
+                open-type="contact"
+                send-message-title="书法老师:"
+                :show-message-card="true"
+                send-message-path="../index/index?key=sf"
+                send-message-img="../../static/img/intro_teacher.jpg">
+            <view class="cover-0">
+                <img :src="src + 'guide-top.png'" class="top" :style="{top: navigationBarHeight + 'px'}" mode="widthFix"/>
+                <img :src="src + 'guide-bottom.png'" class="bottom" mode="widthFix"/>
             </view>
             <view class="cover-1" v-if="showGetVideoTip">
                 <img :src="src + 'get-video.png'" class="cover-3" mode="widthFix"/>
-                <button  @click="cancel"
-                         class="cover-2"
-                         hover-class="none"
-                         open-type="contact"
-                         send-message-title="书法老师:"
-                         :show-message-card="true"
-                         send-message-path="../index/index?key=sf"
-                         :send-message-img="`${src}getVideo.png`"
-                >
-                    <img :src="src + 'knowBtn.png'" mode="widthFix"/>
-                </button>
+                <img :src="src + 'knowBtn.png'" mode="widthFix" class="cover-2"/>
             </view>
-        </view>
+        </button>
+
 
         <view class="head" :style="{paddingTop: navigationBarHeight + 'px'}">
             <view class="return" @click="back">
@@ -45,10 +46,13 @@
             <view class="title">熊猫师父写名字</view>
             <view class="return-right"></view>
         </view>
+
         <view class="play-box">
             <view class="block">
                 <template v-if="isPlay">
-                    <video :src="videoSrc" controls="controls" class="video-block" id="video" :autoplay="true"></video>
+                    <video :src="videoSrc" controls="controls" class="video-block" id="video" :autoplay="true">
+<!--                        <cover-view class="controls-title">简单的自定义 controls</cover-view>-->
+                    </video>
                 </template>
                 <template v-else>
                     <template v-if="isEverywordExist(nameList)">
@@ -256,6 +260,20 @@
 </script>
 
 <style scoped lang="scss">
+    .test1{
+        width: 100%;
+        height: 422rpx;
+        position: relative;
+        .test2{
+            position: absolute;
+            width: 100%;
+            background-color: #fff;
+            text-align: center;
+            height: 142rpx;
+            line-height: 142rpx;
+            bottom: 0;
+        }
+    }
     .container{
         min-height: 100vh;
         position: relative;
@@ -277,17 +295,18 @@
             width: 100%;
             height: 100%;
             position: absolute;
-            left: 0;
-            top: 0;
             z-index: 1;
             .top{
                 position: absolute;
                 width: 100%;
+                left: 0;
+                top: 0;
             }
             .bottom{
                 position: absolute;
                 width: 100%;
                 bottom: 0;
+                left: 0;
             }
         }
         .cover-1{
@@ -329,6 +348,13 @@
     .video-block{
         width: 100%;
         height: 100%;
+        position: relative;
+        .controls-title{
+            position: absolute;
+            background-color: #fff;
+            height: 100rpx;
+            bottom: 0;
+        }
     }
     .head{
         height: 90rpx;

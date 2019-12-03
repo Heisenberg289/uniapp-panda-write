@@ -28,6 +28,6 @@ export default {
 		return util.request('name/character/query/', data, 'POST')
 	},
 	getAdress(data) {
-		return util.request('home/address/', data, 'POST')
+		return util.request('home/address/', data, 'GET')
 	}
 }
