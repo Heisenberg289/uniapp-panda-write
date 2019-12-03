@@ -1,6 +1,6 @@
 <template>
     <view  class="container" v-if="src" :class="{'isIphoneX': isIphoneX}">
-        
+
         <button class="guide-container" v-if="showGetLessonTip"
                 @click="cancel"
                 hover-class="none"
@@ -136,7 +136,7 @@
             return {
                 nameList: [],
                 activeIndex: 0,
-                locked: true,
+                locked: !uni.getStorageSync('unlocked'),
                 isPlay: false,
                 readyShare: false,
                 showGetVideoTip: false,
@@ -180,6 +180,7 @@
                         icon: 'none',
                         mask: true
                     })
+                    uni.setStorageSync('unlocked', true)
                     this.locked = false
                 }
 
